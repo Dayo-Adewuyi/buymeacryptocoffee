@@ -8,8 +8,6 @@ let amount = document.getElementById('damount') as HTMLInputElement;
 let amountVal = amount.value;
 
 btn.onclick = async () => {
-    btn.innerText = "Connecting...";
-    console.log('got here')
     //  Create WalletConnect SDK instance
     const wc = new WalletConnect();
 
