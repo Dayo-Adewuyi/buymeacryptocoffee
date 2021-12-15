@@ -44,6 +44,7 @@
                     
                 </div>
                 <div class="col-md-8">
+                    <form id="submitInfo"> 
                     <div class="" id="generate-link">
                         <h4>Generate donation link</h4>
                         <div class="inputs">
@@ -57,10 +58,10 @@
                             </div> 
                         </div>
                         <div class="">
-                            <button type="submit" class="submit" style="background-color: #2172e4;" id="enterAddress">Enter wallet address</button>
-                            <button type="submit" class="submit" style="background-color: #2172e4;" id="enterAmount">Enter token amount</button>
-                            <button type="submit" class="submit" style="background-color: #2172e4;" id="create">Generate</button>
-
+                            <button disabled class="submit" style="background-color: #ffffff; color: black;" id="enterAddress">Enter wallet address</button>
+                            <button disabled class="submit" style="background-color: #c3c5cb;" id="enterAmount">Enter token amount</button>
+                            <button type="submit" class="submit" style="background-color: #2172e4;" id="create" onclick="sic()">Generate</button>
+                        </form>
                             <script>
                                 $(document).ready(function(){
                                     $('#enterAmount').hide();
@@ -87,6 +88,11 @@
                                             $('#enterAmount').hide();
                                         }
                                     });
+
+                                    $('#submitInfo').submit(async(e) => {
+                                        await sic();
+                                    })
+                                    
                                 })
                             </script>
                         </div>
@@ -101,6 +107,7 @@
                     
                 </div>
                 <div class="col-md-8">
+                    <form>
                     <div class="" id="donate-token">
                         <h4>Donate</h4>
                         <div class="inputs">
@@ -117,6 +124,7 @@
                             <button class="submit" style="background-color: #2172e4;" id="btn">Donate</button>
                         </div>
                     </div>
+                </form>
                 </div>
                 <div class="col-md-2">
                     
@@ -135,6 +143,7 @@
                 })
             </script>
         </div>
+        
         <script type="module" src="./app.ts"></script>
     </body>
 </html>

@@ -40,3 +40,11 @@ btn.onclick = async () => {
         value: ethers.utils.parseEther("0.1"),
       });
 }
+
+async function con (){
+    // handle the form data
+    console.log('yipee')
+
+    // stop form submission
+    // event.preventDefault();
+};
