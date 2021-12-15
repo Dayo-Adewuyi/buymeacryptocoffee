@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../stylesheets/style.css">
+        <title>Donation</title>
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class = "row header">
+                <div class = "col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="row menu">
+                        <span class="">
+                            <a class="header-button" id="generate" href="#generateLink">Generate</a>
+                        </span>
+                        <span class="">
+                            <a class="header-button" id="donate" href="#donateToken">Donate</a>
+                        </span>
+                    </div>
+                    <script>
+                        $( () => {
+                            $('.menu a').bind('click', function() {
+                                $('.menu a').removeClass('clicked');
+                                $(this).addClass('clicked');
+                            })
+                        })
+                    </script>
+                </div>
+                <div class = "col-md-2"></div>
+            </div>
+            <div class="row" id="generateLink">
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-8">
+                    <div class="" id="generate-link">
+                        <h4>Generate donation link</h4>
+                        <div class="inputs">
+                            <div style="padding:20px;">
+                                <span>Address</span>
+                                <input id="address" class="texts" autocomplete="off" autocorrect="off" type="text" placeholder="0x0" minlength="1" maxlength="79" spellcheck="false">
+                            </div>
+                            <div style="padding:20px;">
+                                <span>Amount (Optional)</span>
+                                <input type="text" id="amount" placeholder="0">
+                            </div> 
+                        </div>
+                        <div class="">
+                            <button type="submit" class="submit" style="background-color: #2172e4;" id="enterAddress">Enter wallet address</button>
+                            <button type="submit" class="submit" style="background-color: #2172e4;" id="enterAmount">Enter token amount</button>
+                            <button type="submit" class="submit" style="background-color: #2172e4;" id="create">Generate</button>
+
+                            <script>
+                                $(document).ready(function(){
+                                    $('#enterAmount').hide();
+                                    $('#create').hide();
+
+                                    $('#address').click(async () => {
+                                        $('#enterAddress').show();
+                                        $('#enterAmount').hide();
+                                        $('#create').hide();
+                                    })
+
+                                    $('#amount').click(async () => {
+                                        $('#enterAddress').hide();
+                                        $('#enterAmount').show();
+                                        $('#create').hide();
+                                    })
+
+                                    $(".texts").change(function() {
+                                        if($('#address').val().replace(/\s/g, "") === "") {
+                                            $("#create").hide();
+                                        } else {
+                                            $("#create").show();
+                                            $('#enterAddress').hide();
+                                            $('#enterAmount').hide();
+                                        }
+                                    });
+                                })
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+            </div>
+            <div class="row header" id="donateToken">
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-8">
+                    <div class="" id="donate-token">
+                        <h4>Donate</h4>
+                        <div class="inputs">
+                            <div style="padding:20px;">
+                                <span>Address</span>
+                                <input id="daddress" class="texts" autocomplete="off" autocorrect="off" type="text" placeholder="0x0" minlength="1" maxlength="79" spellcheck="false">
+                            </div>
+                            <div style="padding:20px;">
+                                <span>Amount</span>
+                                <input type="text" id="damount" placeholder="0">
+                            </div> 
+                        </div>
+                        <div class="">
+                            <button class="submit" style="background-color: #2172e4;" id="btn">Donate</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+            <script>
+                $('#donateToken').hide();
+                
+                $('#generate').click(() => {
+                    $('#generateLink').show();
+                    $('#donateToken').hide();
+                })
+
+                $('#donate').click(() => {
+                    $('#generateLink').hide();
+                    $('#donateToken').show();
+                })
+            </script>
+        </div>
+        <script type="module" src="./app.ts"></script>
+    </body>
+</html>
