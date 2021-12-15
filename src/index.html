@@ -44,7 +44,6 @@
                     
                 </div>
                 <div class="col-md-8">
-                    <form id="submitInfo"> 
                     <div class="" id="generate-link">
                         <h4>Generate donation link</h4>
                         <div class="inputs">
@@ -58,14 +57,16 @@
                             </div> 
                         </div>
                         <div class="">
-                            <button disabled class="submit" style="background-color: #ffffff; color: black;" id="enterAddress">Enter wallet address</button>
+                            <!--<button disabled class="submit" style="background-color: #ffffff; color: black;" id="enterAddress">Enter wallet address</button>
                             <button disabled class="submit" style="background-color: #c3c5cb;" id="enterAmount">Enter token amount</button>
-                            <button type="submit" class="submit" style="background-color: #2172e4;" id="create" onclick="sic()">Generate</button>
-                        </form>
+                            --><button type="submit" class="submit" style="background-color: #2172e4;" id="create">Generate</button>
+                        
                             <script>
                                 $(document).ready(function(){
-                                    $('#enterAmount').hide();
+                                    $('.modal-content').hide();
+                                   /** $('#enterAmount').hide();
                                     $('#create').hide();
+                                    $('.modal-content').hide();
 
                                     $('#address').click(async () => {
                                         $('#enterAddress').show();
@@ -77,20 +78,29 @@
                                         $('#enterAddress').hide();
                                         $('#enterAmount').show();
                                         $('#create').hide();
-                                    })
+                                    })**/
 
                                     $(".texts").change(function() {
                                         if($('#address').val().replace(/\s/g, "") === "") {
-                                            $("#create").hide();
+                                            $document.getElementById('create').disabled = true;
                                         } else {
-                                            $("#create").show();
-                                            $('#enterAddress').hide();
-                                            $('#enterAmount').hide();
+                                            $document.getElementById('create').disabled = false;
+                                            //$('#enterAddress').hide();
+                                            //$('#enterAmount').hide();
                                         }
                                     });
 
-                                    $('#submitInfo').submit(async(e) => {
-                                        await sic();
+                                    $('#create').click(()=>{
+                                        let url = "https://crypto-donations.netlify.app/";
+                                        if($('#address').val().replace(/\s/g, "") !== "") {
+                                            url = url + "/?daddress=" + $('#address').val().replace(/\s/g, "");
+                                        }
+                                        if($('#amount').val().replace(/\s/g, "") !== "") {
+                                            url = url + "&damount=" + $('#amount').val().replace(/\s/g, "");
+                                        }
+                                        const donationLink = document.getElementById("donationLink");
+                                        donationLink.innerHTML = url;
+                                        $('.modal-content').show();
                                     })
                                     
                                 })
@@ -107,7 +117,7 @@
                     
                 </div>
                 <div class="col-md-8">
-                    <form>
+                    <form action="#", onsubmit="return false" name="MyForm">
                     <div class="" id="donate-token">
                         <h4>Donate</h4>
                         <div class="inputs">
@@ -125,10 +135,53 @@
                         </div>
                     </div>
                 </form>
+                <script type="text/javascript" language="JavaScript">
+                    function FillForm() {
+                    // Specify form's name between the quotes on next line.
+                    var FormName = "MyForm";
+                    var questionlocation = location.href.indexOf('?');
+                    if(questionlocation < 0) { return; }
+                    var q = location.href.substr(questionlocation + 1);
+                    var list = q.split('&');
+                    for(var i = 0; i < list.length; i++) {
+                       var kv = list[i].split('=');
+                       if(! eval('document.'+ FormName+'.'+kv[0])) { continue; }
+                       kv[1] = unescape(kv[1]);
+                       if(kv[1].indexOf('"') > -1) {
+                          var re = /"/g;
+                          kv[1] = kv[1].replace(re,'\\"');
+                          }
+                       eval('document.'+FormName+'.'+kv[0]+'.value="'+kv[1]+'"');
+                       }
+                    }
+                    FillForm();
+                    //-->
+
+                    $(document).ready(function(){
+                        let address = document.getElementById('daddress').value;
+                        let amount = document.getElementById('damount').value;
+
+                        if (address.replace(/\s/g, "") === "" || amount.replace(/\s/g, "") === "") {
+                            $('#donate').trigger("click", async () => {
+                            })
+                            //window.location.href = 'http://localhost:1234/#donateToken';
+                            //document.getElementById('btn').disabled = true;
+                        } else {
+                            $('#donate').trigger("click", async () => {
+                            })
+                            
+                            //document.getElementById('btn').disabled = false;
+                            $('#btn').trigger("click", async () => {
+                            })
+                        }
+                    })
+                    </script>
+                                        
                 </div>
                 <div class="col-md-2">
                     
                 </div>
+            </div>
             <script>
                 $('#donateToken').hide();
                 
@@ -142,6 +195,11 @@
                     $('#donateToken').show();
                 })
             </script>
+            <div class="modal-content" style="text-align:center;">
+                <span class="close">&times;</span>
+                <p>Copy donation link</p>
+                <p id="donationLink">Sic</p>
+            </div>
         </div>
         
         <script type="module" src="./app.ts"></script>

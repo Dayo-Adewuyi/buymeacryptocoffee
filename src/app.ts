@@ -2,6 +2,10 @@ import WalletConnect from "walletconnect";
 import { providers, ethers } from "ethers";
 
 const btn = document.getElementById('btn') as HTMLButtonElement;
+let address = document.getElementById('daddress') as HTMLInputElement;
+let addressVal = address.value;
+let amount = document.getElementById('damount') as HTMLInputElement;
+let amountVal = amount.value;
 
 btn.onclick = async () => {
     btn.innerText = "Connecting...";
@@ -36,15 +40,7 @@ btn.onclick = async () => {
     
     const signer = web3Provider.getSigner();
       const tx = await signer.sendTransaction({
-        to: "0x66fe4806cD41BcD308c9d2f6815AEf6b2e38f9a3",
-        value: ethers.utils.parseEther("0.1"),
+        to: addressVal,
+        value: ethers.utils.parseEther(amountVal),
       });
 }
-
-async function con (){
-    // handle the form data
-    console.log('yipee')
-
-    // stop form submission
-    // event.preventDefault();
-};
