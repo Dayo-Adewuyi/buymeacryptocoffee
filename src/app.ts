@@ -1,6 +1,10 @@
 import WalletConnect from "walletconnect";
 import { providers, ethers } from "ethers";
 import detectEthereumProvider from "@metamask/detect-provider";
+import * as dotenv from "dotenv";
+
+dotenv.config();
+const infuraId = process.env.INFURA_ID;
 
 const btn = document.getElementById('btn') as HTMLButtonElement;
 let address = document.getElementById('daddress') as HTMLInputElement;
@@ -49,7 +53,7 @@ btn.onclick = async () => {
         //  Get your desired provider
 
         const provider = await wc.getWeb3Provider({
-            infuraId: "e93d42bc84a24d3eac4cd187495f0adf",
+            infuraId: infuraId,
             qrcodeModalOptions: {
                 mobileLinks: [
                 "rainbow",
