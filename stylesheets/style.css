@@ -85,6 +85,7 @@ input:focus {
     color: black;
     padding: 10px;
     border-radius: 15px;
+    display: inline-block !important;
 }
 
 a:hover, a:focus {
@@ -131,5 +132,6 @@ a:hover, a:focus {
         border-radius: 15px;
         width: 100% !important;
         margin: auto;
+        margin-top: 30px;
     }
     }
