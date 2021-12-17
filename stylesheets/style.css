@@ -13,7 +13,7 @@ body {
     color: black;
     background-color: #c3c5cb;
     border-radius: 15px;
-    width: 25%;
+    width: 40%;
     margin: auto;
 }
 
@@ -107,5 +107,29 @@ a:hover, a:focus {
         font-size: 12px !important;
         float: right;
         margin: 20px 0;
+    }
+    .menu {
+        width: 60% !important;
+        margin: 0;
+        position: fixed !important;
+        bottom: 20px !important;
+    }
+    .header {
+        width: 90% !important;
+        margin: auto !important;
+    }
+    .header-button {
+        padding: 10px;
+
+        display: inline-block !important;
+    }
+    #generate-link, #donate-token {
+        padding: 3%;
+        text-align: left;
+        color: black;
+        background-color: #c3c5cb;
+        border-radius: 15px;
+        width: 100% !important;
+        margin: auto;
     }
     }
