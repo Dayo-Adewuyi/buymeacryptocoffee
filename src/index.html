@@ -49,11 +49,11 @@
                         <div class="inputs">
                             <div style="padding:20px;">
                                 <span>Address</span>
-                                <input id="address" class="texts" autocomplete="off" autocorrect="off" type="text" placeholder="0x0" minlength="64" maxlength="64" spellcheck="false">
+                                <input id="address" class="texts" autocomplete="off" autocorrect="off" type="text" placeholder="0x0" minlength="42" maxlength="64" spellcheck="false">
                             </div>
                             <div style="padding:20px;">
                                 <span>Amount (ETH)</span>
-                                <input type="text" id="amount" placeholder="Optional" maxlength="5" pattern="\d*">
+                                <input type="number" id="amount" placeholder="0.1" step=".001", min="0" maxlength="5" onkeypress="return event.charCode > 45">
                             </div> 
                         </div>
                         <div class="">
@@ -99,7 +99,8 @@
                                             url = url + "&damount=" + $('#amount').val().replace(/\s/g, "");
                                         }
                                         const donationLink = document.getElementById("donationLink");
-                                        donationLink.innerHTML = url;
+                                        $('a.copy').attr('href', url);
+                                        $('a.visit').attr('href', url);
                                         $('.modal-content').show();
                                     })
                                     
@@ -123,11 +124,11 @@
                         <div class="inputs">
                             <div style="padding:20px;">
                                 <span>Address</span>
-                                <input id="daddress" class="texts" autocomplete="off" autocorrect="off" type="text" placeholder="0x0" minlength="1" maxlength="79" spellcheck="false">
+                                <input id="daddress" class="texts" autocomplete="off" autocorrect="off" type="text" placeholder="0x0" minlength="1" maxlength="64" spellcheck="false">
                             </div>
                             <div style="padding:20px;">
                                 <span>Amount (ETH)</span>
-                                <input type="text" id="damount" placeholder="0">
+                                <input type="number" id="damount" placeholder="0">
                             </div> 
                         </div>
                         <div class="">
@@ -200,8 +201,25 @@
             </script>
             <div class="modal-content" style="text-align:center;">
                 <span class="close">&times;</span>
-                <p>Copy donation link</p>
-                <p id="donationLink"></p>
+               <!-- <p>Copy donation link</p>-->
+                <p><a class="copy" data-toggle="tooltip" title="Copy to Clipboard">Copy link to clipboard <i class="fa fa-copy"></i></a></p>
+                <p><a class="visit">Visit link</a></p>
+                <script>
+                    $(document).ready(function(){
+                        $('.copy').click(function (e) {
+                            e.preventDefault();
+                            var copyText = $(this).attr('href');
+                         
+                            document.addEventListener('copy', function(e) {
+                               e.clipboardData.setData('text/plain', copyText);
+                               e.preventDefault();
+                            }, true);
+                         
+                            document.execCommand('copy');  
+                            console.log('copied link : ', copyText);
+                          });
+                    })
+                </script>
             </div>
             <p id="error-message" style="text-align:center; color:red;"></p>
         </div>

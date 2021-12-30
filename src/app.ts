@@ -39,6 +39,8 @@ let amountVal = amount.value;
 }
 
 btn.onclick = async () => {
+    amount = document.getElementById('damount') as HTMLInputElement;
+    amountVal = amount.value;
     const ethereumProvider = await detectEthereumProvider();
 
     if (ethereumProvider) {
