@@ -98,7 +98,7 @@
                                         if($('#amount').val().replace(/\s/g, "") !== "") {
                                             url = url + "&damount=" + $('#amount').val().replace(/\s/g, "");
                                         }
-                                        const donationLink = document.getElementById("donationLink");
+                                        console.log(url)
                                         $('a.copy').attr('href', url);
                                         $('a.visit').attr('href', url);
                                         $('.modal-content').show();
@@ -128,7 +128,7 @@
                             </div>
                             <div style="padding:20px;">
                                 <span>Amount (ETH)</span>
-                                <input type="number" id="amount" placeholder="0.1" step=".001", min="0" maxlength="5" onkeypress="return event.charCode > 45">
+                                <input type="number" id="damount" placeholder="0.1" step=".001", min="0" maxlength="5" onkeypress="return event.charCode > 45">
                             </div> 
                         </div>
                         <div class="">
