@@ -82,9 +82,9 @@
 
                                     $(".texts").change(function() {
                                         if($('#address').val().replace(/\s/g, "") === "") {
-                                            $document.getElementById('create').disabled = true;
+                                            document.getElementById('create').disabled = true;
                                         } else {
-                                            $document.getElementById('create').disabled = false;
+                                            document.getElementById('create').disabled = false;
                                             //$('#enterAddress').hide();
                                             //$('#enterAmount').hide();
                                         }
@@ -98,7 +98,7 @@
                                         if($('#amount').val().replace(/\s/g, "") !== "") {
                                             url = url + "&damount=" + $('#amount').val().replace(/\s/g, "");
                                         }
-                                        console.log(url)
+                                        
                                         $('a.copy').attr('href', url);
                                         $('a.visit').attr('href', url);
                                         $('.modal-content').show();
@@ -205,20 +205,23 @@
                 <span class="close">&times;</span>
                <!-- <p>Copy donation link</p>-->
                 <p><a class="copy" data-toggle="tooltip" title="Copy to Clipboard">Copy link to clipboard <i class="fa fa-copy"></i></a></p>
+                <p><input type="text" value="" id="copyLink"></p>
                 <p><a class="visit">Visit link</a></p>
                 <script>
                     $(document).ready(function(){
+                        $('#copyLink').hide();
+                       
                         $('.copy').click(function (e) {
                             e.preventDefault();
-                            var copyText = $(this).attr('href');
-                         
-                            document.addEventListener('copy', function(e) {
-                               e.clipboardData.setData('text/plain', copyText);
-                               e.preventDefault();
-                            }, true);
-                         
-                            document.execCommand('copy');  
-                            console.log('copied link : ', copyText);
+                            
+                            var copyText = document.getElementById("copyLink");
+                            copyText.value = $('.copy').attr('href');
+                            
+                            copyText.select();
+                            copyText.setSelectionRange(0, 99999);
+                            navigator.clipboard.writeText(copyText.value)
+                            console.log('copied link : ', copyText.value);
+                            
                           });
                     })
                 </script>

@@ -46,9 +46,11 @@ let successMessage = document.getElementById('success-message') as HTMLParagraph
         .catch((error: any) => {
             console.error;
             let errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
+            errorMessage.innerHTML = ""
             errorMessage.innerHTML = error.message;
         });
     } else {
+        successMessage.innerHTML = "";
         errorMessage.innerHTML = "Please connect to mainnet";
     }
 }
@@ -102,10 +104,12 @@ btn.onclick = async () => {
             })
             .then((txHash: any) => {
                 console.log(txHash)
+                errorMessage.innerHTML = ""
                 successMessage.innerHTML = "Transaction Successful";
             })
             .catch((error: any) => {
                 console.error;
+                successMessage.innerHTML = ""
                 let errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
                 errorMessage.innerHTML = error.message;
             });
