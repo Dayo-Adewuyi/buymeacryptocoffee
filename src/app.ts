@@ -25,26 +25,27 @@ let successMessage = document.getElementById('success-message') as HTMLParagraph
     let weiAmount = ethers.utils.parseEther(amountVal);
 	
 	if (network === "main") {
+        errorMessage.innerHTML = "Approve transaction in your ether wallet";
         await (window as any).ethereum
-    .request({
-      method: 'eth_sendTransaction',
-      params: [
-        {
-          from: accounts[0],
-          to: addressVal,
-          value: weiAmount._hex,
-        },
-      ],
-    })
-    .then((txHash: any) => {
-        console.log(txHash)
-        successMessage.innerHTML = "Transaction Successful";
-    })
-    .catch((error: any) => {
-        console.error;
-        let errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
-        errorMessage.innerHTML = error.message;
-    });
+        .request({
+        method: 'eth_sendTransaction',
+        params: [
+            {
+            from: accounts[0],
+            to: addressVal,
+            value: weiAmount._hex,
+            },
+        ],
+        })
+        .then((txHash: any) => {
+            console.log(txHash)
+            successMessage.innerHTML = "Transaction Successful";
+        })
+        .catch((error: any) => {
+            console.error;
+            let errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
+            errorMessage.innerHTML = error.message;
+        });
     } else {
         errorMessage.innerHTML = "Please connect to mainnet";
     }
@@ -91,6 +92,7 @@ btn.onclick = async () => {
         
         if (network === "main") {
             const signer = web3Provider.getSigner();
+            errorMessage.innerHTML = "Approve transaction in your ether wallet";
             await signer.sendTransaction({
                 to: addressVal,
                 value: ethers.utils.parseEther(amountVal),
