@@ -20,13 +20,12 @@ let successMessage = document.getElementById('success-message') as HTMLParagraph
 	const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' })
 
 	const account = await accounts[0];
-    web3.eth.net.getNetworkType()
-    .then(console.log);
+    let network = web3.eth.net.getNetworkType()
 
     let weiAmount = ethers.utils.parseEther(amountVal);
-    console.log(weiAmount)
 	
-	await (window as any).ethereum
+	if (network === "main") {
+        await (window as any).ethereum
     .request({
       method: 'eth_sendTransaction',
       params: [
@@ -46,6 +45,9 @@ let successMessage = document.getElementById('success-message') as HTMLParagraph
         let errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
         errorMessage.innerHTML = error.message;
     });
+    } else {
+        errorMessage.innerHTML = "Please connect to mainnet";
+    }
 }
 
 btn.onclick = async () => {
@@ -85,20 +87,25 @@ btn.onclick = async () => {
         //  Wrap with Web3Provider from ethers.js
         const web3Provider = new providers.Web3Provider(provider);
         
+        let network = web3.eth.net.getNetworkType()
         
-        const signer = web3Provider.getSigner();
-        await signer.sendTransaction({
-            to: addressVal,
-            value: ethers.utils.parseEther(amountVal),
-        })
-        .then((txHash: any) => {
-            console.log(txHash)
-            successMessage.innerHTML = "Transaction Successful";
-        })
-        .catch((error: any) => {
-            console.error;
-            let errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
-            errorMessage.innerHTML = error.message;
-        });
+        if (network === "main") {
+            const signer = web3Provider.getSigner();
+            await signer.sendTransaction({
+                to: addressVal,
+                value: ethers.utils.parseEther(amountVal),
+            })
+            .then((txHash: any) => {
+                console.log(txHash)
+                successMessage.innerHTML = "Transaction Successful";
+            })
+            .catch((error: any) => {
+                console.error;
+                let errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
+                errorMessage.innerHTML = error.message;
+            });
+        } else {
+            errorMessage.innerHTML = "Please connect to mainnet";
+        }
     }
 }
