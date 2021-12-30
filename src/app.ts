@@ -18,6 +18,7 @@ let successMessage = document.getElementById('success-message') as HTMLParagraph
 
 (window as any).getAccount = async () => {
 	const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' })
+    console.log(accounts)
 
 	const account = await accounts[0];
     let network = await web3.eth.net.getNetworkType()
