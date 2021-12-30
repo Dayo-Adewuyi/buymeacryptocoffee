@@ -128,7 +128,7 @@
                             </div>
                             <div style="padding:20px;">
                                 <span>Amount (ETH)</span>
-                                <input type="number" id="damount" placeholder="0">
+                                <input type="number" id="amount" placeholder="0.1" step=".001", min="0" maxlength="5" onkeypress="return event.charCode > 45">
                             </div> 
                         </div>
                         <div class="">
@@ -190,6 +190,7 @@
                 $('#donateToken').hide();
                 
                 $('#generate').click(() => {
+                    $('#error-message').innerHTML = "";
                     $('#generateLink').show();
                     $('#donateToken').hide();
                 })
@@ -222,6 +223,7 @@
                 </script>
             </div>
             <p id="error-message" style="text-align:center; color:red;"></p>
+            <p id="success-message" style="text-align:center; color:green;"></p>
         </div>
         
         <script type="module" src="./app.ts"></script>

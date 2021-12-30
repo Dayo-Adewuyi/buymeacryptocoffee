@@ -2,20 +2,27 @@ import WalletConnect from "walletconnect";
 import { providers, ethers } from "ethers";
 import detectEthereumProvider from "@metamask/detect-provider";
 import * as dotenv from "dotenv";
+const Web3 = require("web3");
+
 
 dotenv.config();
 const infuraId = process.env.INFURA_ID;
-
+const web3 = new Web3(`https://mainnet.infura.io/v3/${infuraId}`);
 const btn = document.getElementById('btn') as HTMLButtonElement;
 let address = document.getElementById('daddress') as HTMLInputElement;
 let addressVal = address.value;
 let amount = document.getElementById('damount') as HTMLInputElement;
 let amountVal = amount.value;
+let errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
+let successMessage = document.getElementById('success-message') as HTMLParagraphElement;
 
 (window as any).getAccount = async () => {
 	const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' })
 
 	const account = await accounts[0];
+    web3.eth.net.getNetworkType()
+    .then(console.log);
+
     let weiAmount = ethers.utils.parseEther(amountVal);
     console.log(weiAmount)
 	
@@ -30,7 +37,10 @@ let amountVal = amount.value;
         },
       ],
     })
-    .then((txHash: any) => console.log(txHash))
+    .then((txHash: any) => {
+        console.log(txHash)
+        successMessage.innerHTML = "Transaction Successful";
+    })
     .catch((error: any) => {
         console.error;
         let errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
@@ -39,6 +49,8 @@ let amountVal = amount.value;
 }
 
 btn.onclick = async () => {
+    errorMessage.innerHTML = "";
+    successMessage.innerHTML = "";
     amount = document.getElementById('damount') as HTMLInputElement;
     amountVal = amount.value;
     const ethereumProvider = await detectEthereumProvider();
@@ -79,7 +91,10 @@ btn.onclick = async () => {
             to: addressVal,
             value: ethers.utils.parseEther(amountVal),
         })
-        .then((txHash: any) => console.log(txHash))
+        .then((txHash: any) => {
+            console.log(txHash)
+            successMessage.innerHTML = "Transaction Successful";
+        })
         .catch((error: any) => {
             console.error;
             let errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
