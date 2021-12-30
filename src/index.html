@@ -49,11 +49,11 @@
                         <div class="inputs">
                             <div style="padding:20px;">
                                 <span>Address</span>
-                                <input id="address" class="texts" autocomplete="off" autocorrect="off" type="text" placeholder="0x0" minlength="1" maxlength="79" spellcheck="false">
+                                <input id="address" class="texts" autocomplete="off" autocorrect="off" type="text" placeholder="0x0" minlength="64" maxlength="64" spellcheck="false">
                             </div>
                             <div style="padding:20px;">
                                 <span>Amount (ETH)</span>
-                                <input type="text" id="amount" placeholder="Optional">
+                                <input type="text" id="amount" placeholder="Optional" maxlength="5" pattern="\d*">
                             </div> 
                         </div>
                         <div class="">
@@ -93,7 +93,7 @@
                                     $('#create').click(()=>{
                                         let url = "https://crypto-donations.netlify.app/";
                                         if($('#address').val().replace(/\s/g, "") !== "") {
-                                            url = url + "/?daddress=" + $('#address').val().replace(/\s/g, "");
+                                            url = url + "?daddress=" + $('#address').val().replace(/\s/g, "");
                                         }
                                         if($('#amount').val().replace(/\s/g, "") !== "") {
                                             url = url + "&damount=" + $('#amount').val().replace(/\s/g, "");
@@ -161,18 +161,20 @@
                         let address = document.getElementById('daddress').value;
                         let amount = document.getElementById('damount').value;
 
-                        if (address.replace(/\s/g, "") === "" || amount.replace(/\s/g, "") === "") {
-                            $('#donate').trigger("click", async () => {
-                            })
-                            //window.location.href = 'http://localhost:1234/#donateToken';
-                            //document.getElementById('btn').disabled = true;
-                        } else {
-                            $('#donate').trigger("click", async () => {
-                            })
-                            
-                            //document.getElementById('btn').disabled = false;
-                            $('#btn').trigger("click", async () => {
-                            })
+                        if (window.location.href !== "https://crypto-donations.netlify.app/" || window.location.href !== "https://crypto-donations.netlify.app/#generateLink") {
+                            if (address.replace(/\s/g, "") === "" || amount.replace(/\s/g, "") === "") {
+                                $('#donate').trigger("click", async () => {
+                                })
+                                //window.location.href = 'http://localhost:1234/#donateToken';
+                                //document.getElementById('btn').disabled = true;
+                            } else {
+                                $('#donate').trigger("click", async () => {
+                                })
+                                
+                                //document.getElementById('btn').disabled = false;
+                                $('#btn').trigger("click", async () => {
+                                })
+                            }
                         }
                     })
                     </script>
