@@ -20,7 +20,8 @@ let successMessage = document.getElementById('success-message') as HTMLParagraph
 	const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' })
 
 	const account = await accounts[0];
-    let network = web3.eth.net.getNetworkType()
+    let network = await web3.eth.net.getNetworkType()
+    console.log(network)
 
     let weiAmount = ethers.utils.parseEther(amountVal);
 	
@@ -89,6 +90,7 @@ btn.onclick = async () => {
         const web3Provider = new providers.Web3Provider(provider);
         
         let network = web3.eth.net.getNetworkType()
+        console.log(network)
         
         if (network === "main") {
             const signer = web3Provider.getSigner();
