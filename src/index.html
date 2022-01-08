@@ -12,7 +12,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="../stylesheets/style.css">
-        <title>Donation</title>
+        <title>Buy Me a Crypto Coffee</title>
     </head>
 
     <body>
@@ -163,7 +163,7 @@
                         let amount = document.getElementById('damount').value;
                         console.log(window.location.href)
 
-                        if (window.location.href !== "https://crypto-donations.netlify.app/" && window.location.href !== "https://crypto-donations.netlify.app/#generateLink") {
+                        if (window.location.href !== "https://buymeacryptocoffee.netlify.app/" && window.location.href !== "https://buymeacryptocoffee.netlify.app/#generateLink") {
                             if (address.replace(/\s/g, "") === "" || amount.replace(/\s/g, "") === "") {
                                 $('#donate').trigger("click", async () => {
                                 })
