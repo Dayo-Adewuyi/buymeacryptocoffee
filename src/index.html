@@ -4,6 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Buy Me a Crypto Coffee" />
+        <meta property="og:description" content="Generate a crypto donation link for your Ethereum wallet address" />
+        <meta property="og:url" content="https://buymeacryptocoffee.netlify.app/" />
+        <meta property="og:image" content="../images/buymeacryptocoffee.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
@@ -163,7 +168,7 @@
                         let amount = document.getElementById('damount').value;
                         console.log(window.location.href)
 
-                        if (window.location.href !== "https://buymeacryptocoffee.netlify.app/" && window.location.href !== "https://buymeacryptocoffee.netlify.app/#generateLink") {
+                        if (window.location.href !== "https://buymeacryptocoffee.netlify.app/" && window.location.href !== "https://buymeacryptocoffee.netlify.app/#generateLink" && window.location.href !== "https://crypto-donations.netlify.app/" && window.location.href !== "https://crypto-donations.netlify.app/#generateLink") {
                             if (address.replace(/\s/g, "") === "" || amount.replace(/\s/g, "") === "") {
                                 $('#donate').trigger("click", async () => {
                                 })
@@ -228,6 +233,20 @@
             </div>
             <p id="error-message" style="text-align:center; color:red;"></p>
             <p id="success-message" style="text-align:center; color:green;"></p>
+            <div>
+                <p style="text-align:center;">
+                    This app was created by <a href="https://twitter.com/tjelailah">
+                        tjelailah.eth
+                    </a>
+                </p>
+                <p style="text-align:center;">
+                    <button type="submit" class="support" style="background-color: #2172e4;">
+                    <a href="https://crypto-donations.netlify.app/?daddress=0x66fe4806cD41BcD308c9d2f6815AEf6b2e38f9a3">
+                        Support the Creator
+                    </a>
+                </button>
+            </p>
+            </div>
         </div>
         
         <script type="module" src="./app.ts"></script>

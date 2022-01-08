@@ -78,6 +78,19 @@ input:focus {
     color: white;
 }
 
+.support {
+    margin: auto;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 30px;
+    color: white;
+}
+
+.support a {
+    color: white;
+    text-decoration: none;
+}
+
 .header-button {
     background-color: #c3c5cb;
     border: 0;
@@ -88,7 +101,7 @@ input:focus {
     display: inline-block !important;
 }
 
-a:hover, a:focus {
+.menu a:hover, a:focus {
     text-decoration: none;
     color: black;
     background-color: white;
